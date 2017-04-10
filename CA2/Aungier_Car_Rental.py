@@ -15,13 +15,13 @@ class Dealership(object):
         # Making an assumption here that the dealer will maintain the current 
         # ratio of 50% petrol, 20% diesel, 10% electric and 20% hybrid
         
-        for i in range(overallTotal*0.1):
+        for i in range(int(self.overallTotal*0.1)):
            self.electric_cars.append(ElectricCar())
-        for i in range(overallTotal*0.5):
+        for i in range(int(self.overallTotal*0.5)):
            self.petrol_cars.append(PetrolCar())
-        for i in range(overallTotal*0.2):
+        for i in range(int(self.overallTotal*0.2)):
            self.diesel_cars.append(DieselCar())
-        for i in range(overallTotal*0.2):
+        for i in range(int(self.overallTotal*0.2)):
            self.hybrid_cars.append(HybridCar())
 
     def stock_count(self):
@@ -54,6 +54,3 @@ proceed = 'y'
 while proceed == 'y':
     dealership.process_rental()
     proceed = raw_input('continue? y/n')
-
-petrol, diesel, electric, or hybrid cars.
-They have initially 40 cars in their rental pool made up of 50% petrol, 20% diesel, 10% electric and 20% hybrid.
