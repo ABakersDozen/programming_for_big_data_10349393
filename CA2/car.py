@@ -50,20 +50,23 @@ class ElectricCar(Car):
     
 class PetrolCar(Car):
     def __init__(self):
+        Car.__init__(self)
         self.make = 'Toyota'
         self.model = 'Avensis' 
-        self.engineSize = '1.6'
-
+        self.engineSize = '1.6 ltr'
+        
 
 class DieselCar(Car):
     def __init__(self):
+        Car.__init__(self)
         self.make = 'Volkswagon'
         self.model = 'Passat' 
-        self.engineSize = '1.9'    
+        self.engineSize = '1.9 ltr'    
     
     
 class HybridCar(Car):
      def __init__(self):
+        Car.__init__(self)
         self.make = 'Mitsubishi'
         self.model = 'Outlander PHEV' 
-        self.engineSize = '2.0'
+        self.engineSize = '2.0 ltr'
