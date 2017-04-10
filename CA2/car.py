@@ -1,36 +1,69 @@
 # Define a class for my car
 
 class Car(object):
-    # implement the car object.
-    
+    # implement the car object.    
     def __init__(self):
-        self.__colour = ''
-        self.__make = ''
-        self.__mileage = 0
-        self.engineSize = ''
+        self.colour = "Aungier Rental Red - Branded"
+        self.mileage = 0
+        self.rentalStatus = 0 # 0 indicates not rented, 1 will indicate not available
 
     def getColour(self):
-        return self.__colour
+        return self.colour
 
     def getMake(self):
-        return self.__make
+        return self.make
+    
+    def getStatus(self):
+        return self.rentalStatus
 
     def getMileage(self):
-        return self.__mileage
-
-    def setColour(self, colour):
-        self.__colour = colour
+        return self.mileage
+    
+    def getEngineSize(self):
+        if self.engineSize is None:
+            return self.batterySize
+        else:
+            return self.engineSize
 
     def setMake(self, make):
-        self.__make = make
+        self.make = make
+        
+    def setModel(self, model):
+        self.make = model
 
     def setMileage(self, mileage):
-        self.__mileage = mileage
+        self.mileage = mileage
 
     def paint(self, colour):
-        self.__colour = colour
-        return self.__colour
+        self.colour = colour
 
     def move(self, distance):
-        self.__mileage = self.__mileage + distance
-        return self.__mileage
+        self.mileage = self.mileage + distance
+        return self.mileage
+
+
+class ElectricCar(Car):
+    def __init__(self):
+        self.make = 'Tesla'
+        self.model = 'Model S P85D' 
+        self.batterySize = '85-kWh'
+    
+class PetrolCar(Car):
+    def __init__(self):
+        self.make = 'Toyota'
+        self.model = 'Avensis' 
+        self.engineSize = '1.6'
+
+
+class DieselCar(Car):
+    def __init__(self):
+        self.make = 'Volkswagon'
+        self.model = 'Passat' 
+        self.engineSize = '1.9'    
+    
+    
+class HybridCar(Car):
+     def __init__(self):
+        self.make = 'Mitsubishi'
+        self.model = 'Outlander PHEV' 
+        self.engineSize = '2.0'
