@@ -13,6 +13,9 @@ class Car(object):
     def getID(self):
         return self.uniqueID
 
+    def getType(self):
+        return self.type
+    
     def getMake(self):
         return self.make
     
@@ -53,6 +56,7 @@ class ElectricCar(Car):
         self.engineSize = None
         self.batterySize = '85-kWh'
         self.uniqueID = uniqueID
+        self.type = 'Electric'
     
 class PetrolCar(Car):
     def __init__(self, uniqueID):
@@ -61,6 +65,7 @@ class PetrolCar(Car):
         self.model = 'Avensis' 
         self.engineSize = '1.6 ltr'
         self.uniqueID = uniqueID
+        self.type = 'Petrol'
         
 
 class DieselCar(Car):
@@ -70,6 +75,7 @@ class DieselCar(Car):
         self.model = 'Passat' 
         self.engineSize = '1.9 ltr'  
         self.uniqueID = uniqueID
+        self.type = 'Diesel'
     
     
 class HybridCar(Car):
@@ -79,3 +85,4 @@ class HybridCar(Car):
         self.model = 'Outlander PHEV' 
         self.engineSize = '2.0 ltr'
         self.uniqueID = uniqueID
+        self.type = 'Hybrid'
