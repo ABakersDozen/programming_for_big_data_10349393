@@ -9,6 +9,9 @@ class Car(object):
 
     def getColour(self):
         return self.colour
+    
+    def getID(self):
+        return self.uniqueID
 
     def getMake(self):
         return self.make
@@ -43,30 +46,36 @@ class Car(object):
 
 
 class ElectricCar(Car):
-    def __init__(self):
+    def __init__(self, uniqueID):
+        Car.__init__(self)
         self.make = 'Tesla'
         self.model = 'Model S P85D' 
+        self.engineSize = None
         self.batterySize = '85-kWh'
+        self.uniqueID = uniqueID
     
 class PetrolCar(Car):
-    def __init__(self):
+    def __init__(self, uniqueID):
         Car.__init__(self)
         self.make = 'Toyota'
         self.model = 'Avensis' 
         self.engineSize = '1.6 ltr'
+        self.uniqueID = uniqueID
         
 
 class DieselCar(Car):
-    def __init__(self):
+    def __init__(self, uniqueID):
         Car.__init__(self)
         self.make = 'Volkswagon'
         self.model = 'Passat' 
-        self.engineSize = '1.9 ltr'    
+        self.engineSize = '1.9 ltr'  
+        self.uniqueID = uniqueID
     
     
 class HybridCar(Car):
-     def __init__(self):
+     def __init__(self, uniqueID):
         Car.__init__(self)
         self.make = 'Mitsubishi'
         self.model = 'Outlander PHEV' 
         self.engineSize = '2.0 ltr'
+        self.uniqueID = uniqueID

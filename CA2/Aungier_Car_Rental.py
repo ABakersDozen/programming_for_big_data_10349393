@@ -12,16 +12,21 @@ class Dealership(object):
     
     def create_current_stock(self):
         self.overallTotal = 40
+        uniqueID = 100
         # Making an assumption here that the dealer will maintain the current 
         # ratio of 50% petrol, 20% diesel, 10% electric and 20% hybrid  
         for i in range(int(self.overallTotal*0.5)):
-           self.petrol_cars.append(PetrolCar())
+           self.petrol_cars.append(PetrolCar(uniqueID))
+           uniqueID += 1
         for i in range(int(self.overallTotal*0.2)):
-           self.diesel_cars.append(DieselCar())
+           self.diesel_cars.append(DieselCar(uniqueID))
+           uniqueID += 1
         for i in range(int(self.overallTotal*0.2)):
-           self.hybrid_cars.append(HybridCar())
+           self.hybrid_cars.append(HybridCar(uniqueID))
+           uniqueID += 1
         for i in range(int(self.overallTotal*0.1)):
-           self.electric_cars.append(ElectricCar())
+           self.electric_cars.append(ElectricCar(uniqueID))
+           uniqueID += 1
 
     def stock_count(self):
         print 'Petrol cars in stock {}\n'.format(len(self.petrol_cars))
@@ -29,66 +34,68 @@ class Dealership(object):
         print 'Petrol cars in stock {}\n'.format(len(self.hybrid_cars))
         print 'Electric cars in stock {}\n'.format(len(self.electric_cars))
 
-
-    def rent(self, car_list, rented_cars, amount):     # Process to rent a car function        
+    def rent(self, car_list, amount, customerID):     # Process to rent a car function        
         if len(car_list) < amount:
             print 'Not enough cars in stock.\n'     # Make sure enough cars in stock
             return
         total = 0
         while total < amount:
             carout = car_list.pop()          # Pop last item from given car list and return it
-            self.rented_cars.append(carout)       # Then append to a new list of rented cars that are now unavailable
-            total = total + 1
-            print 'Make: ' + carout.getMake()       
-            print 'Colour: ' + carout.getColour()
-            print 'Engine Size(Cylinders): ' + carout.getEngineSize()            
-        print 'You have rented ' + str(amount) + ' car(s)\n'       
-        return rented_cars
+            self.rented_cars.append([carout, customerID])       # Then append to a new list of rented cars that are now unavailable
+            total += 1
+            print 'Rental Car Unique ID: {}'.format(carout.getID())
+            print 'Make: {}'.format(carout.getMake())      
+            print 'Colour: {}'.format(carout.getColour())
+            print 'Engine Size(Litres or Battery Size): {}'.format(carout.getEngineSize())            
+        print 'You have rented {} car(s)\n'.format(str(amount)) 
     
-    def rented(self, car_list, rented_cars, amount):  # Process for returning cars        
-        total = 0
-        while total < amount:
-            carin = self.rented_cars.pop()
-            car_list.append(carin)
-            total = total + 1
-        print 'You have returned' +str(amount) + 'car(s)\n'
-        return rented_cars, car_list
+    def rented(self, customerID):  # Process for returning cars        
+        amount = 0
+              
+              
+              
+              
+        
+        print "You have returned {} car(s)\n".format(str(amount)) 
+    
+    def nested(self, customerID):
+        return any(customerID in nested for nested in self.rented_cars)
+            
     
     def rental_system(self): # returns and rental
-        rentedcars = []
-        rented = raw_input('Are you returning or renting a car? Type either RETURN or RENT\n')
-        if rented.lower() == 'return':       # Return system
-            type = raw_input('Are you returning a petrol, electric, diesel or hybrid car?\n')
-            amount = raw_input('How many would you like to return?\n')
-            if type == 'petrol':
-                self.rented(self.petrol_cars, rentedcars, amount)
-            elif type.lower() == 'diesel':
-                self.rented(self.diesel_cars, rentedcars, amount)
-            elif type.lower() == 'hybrid':
-                self.rented(self.hybrid_cars, rentedcars, amount)
-            elif type.lower() == 'electric':
-                self.rented(self.electric_cars, rentedcars, amount)
-            else:
-                print 'Error, please check your spelling.\n'
-                return
-        elif rented.lower() == 'rent':        # Rental system
-            answer = raw_input('What type of car would you like? Type: petrol/diesel/hybrid/electric\n')
+        customerID = raw_input("\nWhat is the unique customer ID?\n")
+        rented = raw_input("Are you returning or renting a car? Type either (1)Rent or (2)Return\n")
+        
+        if rented.lower() == 'rent' or rented.lower() == '1':        # Rental system
+            answer = raw_input("What type of car would you like? Type: \n(P)etrol\n(D)iesel\n(H)ybrid\n(E)lectric\n")
             amount = int(raw_input('How many of that type of car?\n'))
-            if answer.lower() == 'petrol':
-                self.rent(self.petrol_cars, rentedcars, amount)
-            elif answer.lower() == 'diesel':
-                self.rent(self.diesel_cars, rentedcars, amount)
-            elif answer.lower() == 'hybrid':
-                self.rent(self.hybrid_cars, rentedcars, amount)
-            elif answer.lower() == 'electric':
-                self.rent(self.electric_cars, rentedcars, amount)
+            if answer.lower() == 'petrol' or answer.lower() == 'p':
+                self.rent(self.petrol_cars, amount, customerID)
+            elif answer.lower() == 'diesel' or answer.lower() == 'd':
+                self.rent(self.diesel_cars, amount, customerID)
+            elif answer.lower() == 'hybrid' or answer.lower() == 'h':
+                self.rent(self.hybrid_cars, amount, customerID)
+            elif answer.lower() == 'electric' or answer.lower() == 'e':
+                self.rent(self.electric_cars, amount, customerID)
             else:
-                print 'Error, please check your spelling.\n'
+                print "Error, please check your spelling.\n"
                 return
+        elif rented.lower() == 'return' or rented.lower() == '2':       # Return system
+            if not self.rented_cars:
+                print "Error, there are no rentals to return!\n"
+                return
+            elif self.nested(customerID) == False:  
+                print "Error, please check the customer ID entered, there are no rentals under that ID.\n"
+                return 
+            else:
+                self.rented(customerID)
+        else:
+            print "Please make a valid selection.\n"
+            return
 
 dealership = Dealership()
 dealership.create_current_stock()
 proceed = 'y'
-while proceed == 'y':
+while proceed.lower() == 'y':
     dealership.rental_system()
-    proceed = raw_input('Would you like to continue? Y/N\n')
+    proceed = raw_input("Would you like to continue? (Y/N)\n")
