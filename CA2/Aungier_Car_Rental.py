@@ -9,13 +9,6 @@ class Dealership(object):
         self.diesel_cars = []
         self.hybrid_cars = []
         self.rented_cars = []
-        
-    def getRentedTotal(self):
-        i=0
-        while i<len(self.rented_cars):
-            print "Rental Car Unique ID: {}".format(self.rented_cars[i][0].getID())
-            print "Rented to: {}\n".format(self.rented_cars[i][1])
-            i += 1
     
     def create_current_stock(self):
         self.overallTotal = 40
@@ -54,7 +47,7 @@ class Dealership(object):
             print "Make: {}".format(carout.getMake())      
             print "Colour: {}".format(carout.getColour())
             print "Engine Size(Litres or Battery Size): {}".format(carout.getEngineSize())            
-        print "\nYou have rented {} car(s)\n".format(str(amount)) 
+        print "\nYou have rented {} car(s)\n".format(amount) 
     
     def rented(self, customerID):  # Process for returning cars        
         amount = 0
@@ -78,7 +71,6 @@ class Dealership(object):
                 if self.rented_cars[i][0].getID() == int(returns):
                     listout = self.rented_cars.pop(i)
                     carin = listout[0]
-                    print carin.getType()
                     if carin.getType() == "Petrol":
                         self.petrol_cars.append(carin)
                     elif carin.getType() == "Diesel":
@@ -93,7 +85,7 @@ class Dealership(object):
                     continue
             amount +=1
             proceed = raw_input("Would you like to return another car? (Y/N)\n")    
-        print "You have returned {} car(s)\n".format(str(amount)) 
+        print "You have returned {} car(s)\n".format(amount) 
     
     def nested(self, customerID):
         return any(customerID in nested for nested in self.rented_cars)
@@ -129,6 +121,13 @@ class Dealership(object):
         else:
             print "Please make a valid selection.\n"
             return
+
+    def getRentedTotal(self):
+        i=0
+        while i<len(self.rented_cars):
+            print "Rental Car Unique ID: {}".format(self.rented_cars[i][0].getID())
+            print "Customer ID rented to: {}\n".format(self.rented_cars[i][1])
+            i += 1
 
 dealership = Dealership()
 dealership.create_current_stock()
