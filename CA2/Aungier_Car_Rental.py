@@ -96,6 +96,7 @@ class Dealership(object):
         
         if rented.lower() == "rent" or rented.lower() == "1":        # Rental system
             self.stock_count()
+            Sorry nothing to rent, please try again
             answer = raw_input("What type of car would you like? Type: \n(P)etrol\n(D)iesel\n(H)ybrid\n(E)lectric\n")
             amount = int(raw_input("How many of that type of car?\n"))
             if answer.lower() == "petrol" or answer.lower() == "p":
@@ -129,11 +130,13 @@ class Dealership(object):
             print "Customer ID rented to: {}\n".format(self.rented_cars[i][1])
             i += 1
 
-dealership = Dealership()
-dealership.create_current_stock()
-proceed = "y"
-while proceed.lower() == "y":
-    dealership.rental_system()
-    proceed = raw_input("Would you like to continue? (Y/N)\n")
-dealership.stock_count()
-dealership.getRentedTotal()
+# enable so that this is only called when the script run from the command line
+if __name__ == '__main__':
+    dealership = Dealership()
+    dealership.create_current_stock()
+    proceed = "y"
+    while proceed.lower() == "y":
+        dealership.rental_system()
+        proceed = raw_input("Would you like to continue? (Y/N)\n")
+    dealership.stock_count()
+    dealership.getRentedTotal()
