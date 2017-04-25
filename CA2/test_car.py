@@ -53,8 +53,22 @@ class TestCar(unittest.TestCase):
         self.assertEqual('1.9 ltr', self.car3.getEngineSize())
         self.assertEqual('2.0 ltr', self.car4.getEngineSize())
 
-    def test_dealer(self):
+    def test_rentalprocess(self): # test the rental process by renting out one car and checking it back in. verifies stock levels also
         self.assertEqual(0, len(self.dealership.rented_cars))
+        self.assertEqual(8, len(self.dealership.hybrid_cars))
+        self.dealership.rent(self.dealership.hybrid_cars,1,"Test")
+        self.assertEqual(1, len(self.dealership.rented_cars))
+        self.assertEqual("Test",self.dealership.rented_cars[0][1])
+        self.assertEqual(7, len(self.dealership.hybrid_cars))
+   
+        original_raw_input = __builtins__.raw_input
+        __builtins__.raw_input = lambda _: "135"
+        self.assertEqual(self.dealership.rented("Test"),None)
+        __builtins__.raw_input = original_raw_input
+        
+        self.assertEqual(0, len(self.dealership.rented_cars))
+        self.assertEqual(8, len(self.dealership.hybrid_cars))
+        
 
 if __name__ == '__main__':
     unittest.main()
