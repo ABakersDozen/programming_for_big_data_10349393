@@ -1,0 +1,10 @@
+------------------------------------------------------------------------
+r1551925 | viacheslav.vdovenko | 2015-11-27 16:57:44 +0000 (Fri, 27 Nov 2015) | 1 line
+Changed paths:
+   A /cloud/personal/syncdrive-international/android/branches/android-15.2-solutions/clients/syncdrive/res/drawable-xxxhdpi (from /cloud/personal/syncdrive-international/android/branches/android-15.2-solutions/clients/syncdrive/res/drawablw-xxxhdpi:1551688)
+   D /cloud/personal/syncdrive-international/android/branches/android-15.2-solutions/clients/syncdrive/res/drawablw-xxxhdpi
+   A /cloud/personal/syncdrive-international/android/branches/android-15.2-solutions/clients/syncdrive-bt/res/drawable-xxxhdpi (from /cloud/personal/syncdrive-international/android/branches/android-15.2-solutions/clients/syncdrive-bt/res/drawablw-xxxhdpi:1551922)
+   D /cloud/personal/syncdrive-international/android/branches/android-15.2-solutions/clients/syncdrive-bt/res/drawablw-xxxhdpi
+
+Renamed folder to the correct name
+------------------------------------------------------------------------
